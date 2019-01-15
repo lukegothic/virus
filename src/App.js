@@ -10,7 +10,7 @@ function generateDeck() {
   ["navy", "yellow", "green", "red"].forEach(color => {
     ["Organo", "Medicina", "Virus"].forEach(tipo => {
       [...Array(5).keys()].forEach(key => {
-        deck.push({ "id": key + tipo[0] + color[0], "type": tipo, "color": color });
+        deck.push({ "id": key + tipo[0] + color[0], "type": tipo, "color": color, "addons": [] });
       });
     });
   });
@@ -24,28 +24,45 @@ function shuffle(a) {
   return a;
 }
 class App extends Component {
+  draw(player) {
+    let phand = player.hand.slice();
+    let cdeck = this.state.deck.slice();
+    let card = cdeck.pop();
+    phand.push(card);
+    this.setState({
+      deck: cdeck
+    });
+    console.log(card, cdeck);
+  }
   constructor(props) {
     super(props);
     this.state = {
-      players: [{
+      player1: {
         "id":   1,
         "hand": [],
         "body": []
-      }, {
+      },
+      player2: {
         "id":   2,
         "hand": [],
         "body": []
-      }],
+      },
       deck: shuffle(generateDeck())
     }
-    console.log(this.state);
   }
   render() {
+    /*
       var pjsx = this.state.players.map((player) => {
         return (<Player key={player.id} data={player} />);
-      });
+      });{pjsx}
+      */
       return (
-        <div>{pjsx}</div>
+        <div>
+          if (this.state.player1) {
+            <Player key={this.state.player1.id} data={this.state.player1} />
+          }
+          <button onClick={() => this.draw(this.state.player1)}></button>
+        </div>
       );
   }
 }
