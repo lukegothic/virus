@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Player from './Player'
 
+
+// TODO: https://cf.geekdo-images.com/original/img/OaB0h0GH-xqWMCp5Apl6Wn7aTPY=/0x0/pic4398781.jpg
+
 function generateDeck() {
   let deck = [];
   ["navy", "yellow", "green", "red"].forEach(color => {
