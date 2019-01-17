@@ -1,13 +1,19 @@
 import React from 'react';
-import Hand from './Hand';
-import Body from './Body';
-export default function Player(props) {
+import Card from './Card';
+export default function Player({player, actionDraw, actionDiscard, actionPlay}) {
     return (
             <div>
-                <span>Player {props.data.id}</span>
-                <Hand cards={props.data.hand} />
+                <strong>Player {player.id}</strong>
+                <div>
+                    <span>Hand</span>
+                    {player.hand.map((card) => <Card key={card.id} card={card} actionPlay={() => actionPlay(player, card)} />)}
+                </div>
+                <div>
+                    <span>Body</span>
+                    {player.body.map((card) => <Card key={card.id} card={card} links={card.links} />)}
+                </div>
+                <button onClick={() => actionDraw(player)}>Draw</button>
+                <button onClick={() => actionDiscard(player)}>Discard</button>
             </div>
-            
-            
         )
 }

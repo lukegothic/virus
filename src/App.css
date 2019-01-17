@@ -30,3 +30,33 @@
     transform: rotate(360deg);
   }
 }
+.card {
+  display:inline-block;
+  height: 80px;
+  width: 50px;
+  -webkit-box-shadow: 0px 1px 5px 1px #000000; 
+  box-shadow: 0px 1px 5px 1px #000000;
+  box-sizing: border-box;
+  border-radius: 5px;
+  line-height: 80px;
+}
+.card.playable {
+  cursor:pointer;
+}
+.card.blue {
+  border: 5px inset dodgerblue;
+}
+.card.red {
+  border: 5px inset maroon;
+}
+.card.green {
+  border: 5px inset forestgreen;
+}
+.card.yellow {
+  border: 5px inset goldenrod;
+}
+.card-links {
+  position: absolute;
+  top: 40px;
+  right: 25px;
+}
