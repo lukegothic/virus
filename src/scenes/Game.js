@@ -8,7 +8,6 @@ const cardTypes = {
     VIRUS: "Virus"
 }
 class Game extends Component {
-    // TODO: actions ??? 
     generateDeck = (useWildcards = true, useSpecials = true) => {
         const qByType = { "Organo": 5, "Medicina": 4, "Virus": 4 };
         let deck = [];
@@ -22,6 +21,14 @@ class Game extends Component {
         // TODO: wildcards + specials
         return deck;
     }
+    checkWinner = (player) => {
+        if (player.body.length === 4 && !player.body.find((bodycard) => bodycard.links.find((link) => link.type === cardTypes.VIRUS ))) {
+            this.setState({
+                winner: player
+            });
+        }
+    }
+    // TODO: actions ??? 
     handleDiscard = (player) => {
         let players = [...this.state.players];
         let playerActioning = players.find((p) => player.id === p.id);
@@ -57,13 +64,6 @@ class Game extends Component {
                     console.log(`Ya tienes un ${card.type} ${card.color}`);
                 }
             break;
-        }
-    }
-    checkWinner = (player) => {
-        if (player.body.length === 4 && !player.body.find((bodycard) => bodycard.links.find((link) => link.type === cardTypes.VIRUS ))) {
-            this.setState({
-                winner: player
-            });
         }
     }
     refillHand = (player) => utils.range(player.hand.length, handSize - 1).forEach(() => this.drawCard(player));
